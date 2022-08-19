@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div>
+    <div class="bg-danger bg-gradient d-flex flex-column w-50 p-5 mx-auto mt-5">
+      <h2 class="text-white text-center fw-bold my-2 ">Discount Calculator </h2>
+
+      <h3 class="text-white text-center fw-bold my-4 " id="h3" style="visibility:hidden;">You Got <span
+          id="persenteg"></span>%
+        Discounted Amount $ <span id="amount"></span></h3>
+      <input type="text" class="mb-3 rounded form-control" id="enter-amount" placeholder="Enter Amount">
+      <input type="text" class="mb-3 rounded form-control" id="enter-persenteg" placeholder="Enter Discount %">
+      <input type="text" class="mb-3 rounded form-control" id="enter-cupon-code"
+        placeholder=" Enter Cupon Code DOM + Discounted %">
+      <button class="btn btn-light fw-bold text-primary" id="submit">Submit</button>
+    </div>
+  </div>
+
+  <script>
+
+    function getAllInputsValues(ids) {
+      const getValue = document.getElementById(ids);
+      // now get strint to number value
+      const getVelueNumber = parseFloat(getValue.value)
+      getValue.value = '';
+      return getVelueNumber;
+
+    }
+
+
+    function getAllElements(element) {
+      const getValue = document.getElementById(element);
+      // now get strint to number value
+      const getVelueNumber = parseFloat(getValue.innerText)
+      getValue.value = '';
+      return getVelueNumber;
+
+    }
+
+    function setElementInText(id, value) {
+      const getSetElementId = document.getElementById(id);
+      getSetElementId.innerText = value;
+
+    }
+
+
+
+    document.getElementById('submit').addEventListener('click', function () {
+
+
+      const getCuponCode = document.getElementById('enter-cupon-code');
+      const getCuponCodeValue = getCuponCode.value;
+      getCuponCode.value = '';
+      const getInputDiscount = getAllInputsValues('enter-persenteg');
+
+
+
+      const cuponAndDiscount = "DOM" + getInputDiscount;
+      const h3 = document.getElementById('h3')
+
+
+
+
+      if (getCuponCodeValue == cuponAndDiscount) {
+        const getInputAmount = getAllInputsValues('enter-amount');
+
+        const persentegCalculet = (getInputAmount / 100) * getInputDiscount;
+
+        const persentegAmount = getInputAmount - persentegCalculet;
+
+
+        const getPersented = getAllElements('persenteg');
+
+        setElementInText('persenteg', getInputDiscount)
+
+        setElementInText('amount', persentegAmount)
+
+        h3.style.visibility = 'visible ';
+      }
+      else (
+        alert('Not a Valid Input Code')
+      )
+
+      // console.log(persentegAmount );
+
+    })
+  </script>
+
+
+</body>
+
+</html>
